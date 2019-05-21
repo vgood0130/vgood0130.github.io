@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+    <!--click하면 plane위치 변경-->
+    <script src="aframe.propagate.js"></script>
+
+    <title>WebVR</title>
+  </head>
+  <body>
+    <a-scene main-ui>
+
+      <a-assets>
+        <img id="start-bg" src="carinsidefront.jpg">
+        <!--<img id="detail-bg" src="carinside.jpg">-->
+        <img id="button" src="button.png">
+        <img id="raygear" src="raygear.jpg">
+        <img id="raybar" src="raybar.png">
+
+        <!--중복된 열 묶기-->
+        <a-mixin id="overlay-fade-in" animation="property: opacity; dir: normal; dur: 500; easing: easeOutQuad; loop: false; from:0; to: .75; startEvents: clickDown;"></a-mixin>
+      </a-assets>
+
+
+      <a-entity id="main-camera" camera look-controls
+                 animation="property: position; dir: normal; dur: 1000; easing: easeInOutQuad; loop: false; from: 0 0 0; to: 0 0 -8; startEvents: viewDetail;">
+         <a-entity cursor="rayOrigin: mouse;" raycaster="objects: .clickable">
+         </a-entity>
+      </a-entity> 
+      <a-entity oculus-touch-controls="hand: left"></a-entity>
+      <a-entity oculus-touch-controls="hand: right"></a-entity>
+
+       <!--vr 배경 띄우기-->
+      <a-sphere id="main-bg" radius="100" position="0 0 0" rotation="0 -90 0" src="#start-bg" material="side: double;"></a-sphere>
+
+
+      <!--a-plane은 hover 효과를 위해 생성
+          easeOutElastic은 scale조절을 bounce한 모션을 주면서-->
+      <a-plane propagate="events:clickDown" id="center-tile" class="clickable" position="0 1 -7" width="0.1" height="0.1" opacity="0"
+                animation="property: scale; dir: normal; dur: 1750; easing: easeOutElastic; loop: false; from: 1 1 1; to: 1.5 1.5 1.5; startEvents: click;">
+
+          
+          <a-link href="raygear.jpg" position="0 -3 0"></a-link>
+
+          <a-link href="raybar.png" position="3 -1 0"></a-link>
+
+          <a-link href="caroutside/caroutside6.html" position="-10.5 -3.5 -1.0" rotation="0 90 0" ></a-link>
+
+      </a-plane>
+
+    </a-scene>
+  </body>
+</html>
