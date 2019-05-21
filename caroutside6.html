@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+    <!--click하면 plane위치 변경-->
+    <script src="aframe.propagate.js"></script>
+
+     <title>caroutside</title>
+   </head>
+
+   <body>
+    <a-scene main-ui>
+     
+       <a-entity cursor="rayOrigin: mouse;" raycaster="objects: .clickable">
+       </a-entity>
+       </a-entity>
+       <a-mixin id="overlay-fade-in" animation="property: opacity; dir: normal; dur: 500; easing: easeOutQuad; loop: false; from:0; to: .75; startEvents: clickDown;"></a-mixin>
+       <a-assets>
+         <img id="start-bg" src="background.png">
+         <img id="button" src="button.png">
+
+         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+
+        <a-asset-item id="car" src="ray.glb">
+       </a-assets>
+
+       <!--vr 배경 띄우기-->
+       <a-sphere id="main-bg" radius="100" position="0 0 0" rotation="0 -90 0" src="#start-bg" material="side: double;"></a-sphere>
+
+      <!--button 생성-->
+       <!--<a-image id="door" class="tile" position="1 1.6 3.5"        src="#button" width="0.5" height="0.5" opacity="0"
+                  animation="property: opacity; dir: normal; dur: 1500; easing: easeOutQuad; loop: false; from:0; to: 1; delay: 1250;">
+       </a-image>
+       <a-image id="light" class="tile" rotation="-45 0 10" position="4 1.6 3.5"        src="#button" width="0.5" height="0.5" opacity="0"
+                  animation="property: opacity; dir: normal; dur: 1500; easing: easeOutQuad; loop: false; from:0; to: 1; delay: 1250;">
+       </a-image>
+       <a-image id="tire" class="tile" position="0 0.6 3.5"        src="#button" width="0.5" height="0.5" opacity="0"
+                  animation="property: opacity; dir: normal; dur: 1500; easing: easeOutQuad; loop: false; from:0; to: 1; delay: 1250;">
+       </a-image>-->
+
+      <a-entity id="car" position="0 0 10">
+       <a-camera id="camera"></a-camera>
+      </a-entity>
+
+       <a-entity id="main-camera" camera look-controls
+                 animation="property: position; dir: normal; dur: 1000; easing: easeInOutQuad; loop: false; from: 0 0 0; to: 0 0 -8; startEvents: viewDetail;">
+         <a-entity cursor="rayOrigin: mouse;" raycaster="objects: .clickable">
+         </a-entity>
+      </a-entity>
+
+      <!--바닥 만들기-->
+      <a-plane src="#groundTexture" rotation="-90 0 0" width="80" height="80" position="0 -2 0"></a-plane>
+
+      <a-gltf-model src="#car" rotation="0 0 -4"></a-gltf-model>
+
+      <a-link href="raygear.jpg" class="clickable" position="4 1.6 3.5" rotation="0 0 0" ></a-link>
+    
+      <a-link href="brakelight.png" class="clickable" position="1.6 1.6 3.5" rotation="0 0 0" ></a-link>
+
+      <a-link href="wheel.png" class="clickable" position="1.6 1.6 3.5" rotation="0 0 0" ></a-link>
+
+      <a-link href="sidemirror.png" class="clickable" position="1.6 1.6 3.5" rotation="0 0 0" ></a-link>
+
+       <a-link href="carinside/carinside.html" class="clickable" position="-2 1.6 3.5" rotation="0 0 0" ></a-link>
+
+     </a-scene>
+  </body>
+</html>
